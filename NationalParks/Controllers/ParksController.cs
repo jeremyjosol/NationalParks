@@ -21,6 +21,7 @@ namespace NationalParks.Controllers
       _db = db;
     }
 
+    [AllowAnonymous]
     [HttpGet]
     public async Task<List<Park>> Get(string name, string state, string description, int annualVisitors, int page = 1, int pageSize = 6)
     {
@@ -46,6 +47,7 @@ namespace NationalParks.Controllers
       return result;
     }
 
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<ActionResult<Park>> GetPark(int id)
     {
@@ -116,6 +118,7 @@ namespace NationalParks.Controllers
       return NoContent();
     }
 
+    [AllowAnonymous]
     [HttpGet("random")]
     public async Task<ActionResult<Park>> GetRandomPark()
     {
@@ -137,6 +140,7 @@ namespace NationalParks.Controllers
       return park;
     }
 
+    [AllowAnonymous]
     [HttpGet("search")]
     public async Task<ActionResult<List<Park>>> SearchPark([FromQuery] string state, [FromQuery] string name, [FromQuery] int? annualVisitors)
     {
