@@ -22,7 +22,7 @@ namespace NationalParks.Controllers
     }
 
     [HttpGet]
-    public async Task<List<Park>> Get(string name, string state, string description, int annualVisitors, int page = 1, int pageSize = 2)
+    public async Task<List<Park>> Get(string name, string state, string description, int annualVisitors, int page = 1, int pageSize = 6)
     {
       IQueryable<Park> query = _db.Parks.AsQueryable();
 
