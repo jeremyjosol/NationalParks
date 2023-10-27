@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace NationalParks.Models
 {
-  public class NationalParksContext : DbContext
+  public class NationalParksContext : IdentityDbContext<ApplicationUser>
   {
-    
+
     public DbSet<Park> Parks { get; set; }
     public NationalParksContext(DbContextOptions<NationalParksContext> options) : base(options)
     {
