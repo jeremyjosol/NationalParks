@@ -11,6 +11,7 @@ namespace NationalParks.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
+  [Authorize]
   public class ParksController : ControllerBase
   {
     private readonly NationalParksContext _db;
