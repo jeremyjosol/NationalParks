@@ -144,7 +144,7 @@ namespace NationalParks.Controllers
 
       if (!string.IsNullOrEmpty(state))
       {
-        parkQuery = parkQuery.Where(entry => entry.Name.Contains(state));
+        parkQuery = parkQuery.Where(entry => entry.State.Contains(state));
       }
 
       if (!string.IsNullOrEmpty(name))
