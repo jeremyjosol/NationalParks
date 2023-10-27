@@ -40,9 +40,9 @@ namespace NationalParks.Controllers
       int skip = (page - 1) * pageSize;
 
       List<Park> result = await query
-        .Skip(skip)
-        .Take(pageSize)
-        .ToListAsync();
+                                .Skip(skip)
+                                .Take(pageSize)
+                                .ToListAsync();
 
       return result;
     }

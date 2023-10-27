@@ -45,6 +45,7 @@ namespace ArtGallery.Controllers
         return BadRequest(result.Errors);
       }
     }
+    
     [HttpPost("SignIn")]
     public async Task<IActionResult> SignIn(SignInDto userInfo)
     {
