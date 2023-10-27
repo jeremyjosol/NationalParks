@@ -82,7 +82,6 @@ To explore National Parks with NSwag, launch the project using `dotnet run` with
 ```
 http://localhost:5000/swagger
 ```
-
 ## Generating a JSON Web Token
 In order to be authorized to use the `POST`, `PUT`, and `DELETE` functionality of the API, you are required to authenticate yourself through Postman with a JSON Web Token (JWT).
 
@@ -152,7 +151,7 @@ Add the following query to the request as raw data in the Body tab:
 * Adjacent to 'Type' will be a drowndown menu, click on the menu and select 'Bearer Token'
 * Within the Body, paste `{yourGeneratedToken}` in the empty form field adjacent to 'Token'
 
-    > You now have full access to the Art Gallery. 
+    > You now have full access to National Parks. 
 
 Test it out by sending a `GET` request to the following endpoint `localhost:5000/api/parks/{id}`
 
@@ -228,7 +227,7 @@ Customize or use the following query as an example to the request as raw data in
 }
 ```
 
-**Note**: Notice that you do not need to add a key for `parkId`, a `POST` request will implicitly generate a new `parkId` value.
+**Note**: You do not need to add the key for `parkId`, a `POST` request implicitly generates a new `parkId` value.
 
 #### Expected JSON Response
 ```json
@@ -311,10 +310,56 @@ http://localhost:5000/api/parks/1
 }
 ```
 
+#### Example `GET` Search Query
+```
+http://localhost:5000/api/parks/search?annualVisitors=800000
+```
+**Note**: To customize your query, add a query parameter to the URL. In this case, we're using annualVisitors to filter parks based on their annual visitors count. You can replace 800000 with the desired value or alternatively, by using different query parameters and values, you can tailor your queries to search for parks that meet specific criteria. For instance, you could change `annualVisitors` to `state` with a value of `California` or `name` with a value of `Redwood` to search for parks by state or name, respectively. 
+
+#### Expected JSON Response
+```json
+[
+  {
+    "parkId": 4,
+    "name": "Redwood National and State Parks",
+    "state": "California",
+    "description": "Home to the tallest trees on Earth, the coastal redwoods.",
+    "annualVisitors": 800000
+  }
+]
+```
+
+#### Additional `GET` Search Example
+```
+http://localhost:5000/api/parks/search?state=oregon
+```
+
+#### Expected JSON Response
+```json
+[
+  {
+    "parkId": 6,
+    "name": "Silver State Falls",
+    "state": "Oregon",
+    "description": "Silver State Falls is a beautiful park featuring stunning waterfalls, lush forests, and hiking trails.",
+    "annualVisitors": 500000
+  }
+]
+```
+#### Example `GET` Random Query
+```
+http://localhost:5000/api/parks/random
+```
+A self-explanatory query, this endpoint will simply generate a randomized individual park. Try it out to see what results you generate as well as the rest of the available endpoints.
+
 ------------------------------
 
 ### Pagination
-National Parks returns a default of 6 results per page at a time. To modify this, use the query parameters `page` and `pageSize` and replace `{customize}` with integer values where `pageSize` is the amount of objects to be viewed.
+National Parks returns a default of 6 results per page at a time with a `GET` request with the following URL:
+```
+http://localhost:5000/api/parks/
+```
+To modify this, use the query parameters `page` and `pageSize` and replace `{customize}` with integer values where `pageSize` is the amount of objects to be viewed.
 
 ```
 http://localhost:5000/api/parks?page={customize}&pageSize={customize}
