@@ -11,11 +11,11 @@ namespace NationalParks.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class NationalParksController : ControllerBase
+  public class ParksController : ControllerBase
   {
     private readonly NationalParksContext _db;
 
-    public NationalParksController(NationalParksContext db)
+    public ParksController(NationalParksContext db)
     {
       _db = db;
     }
