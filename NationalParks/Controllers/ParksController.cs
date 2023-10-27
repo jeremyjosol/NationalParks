@@ -23,7 +23,7 @@ namespace NationalParks.Controllers
 
     [AllowAnonymous]
     [HttpGet]
-    public async Task<List<Park>> Get(string name, string state, string description, int annualVisitors, int page = 1, int pageSize = 6)
+    public async Task<List<Park>> Get(string name, string state, string description, string parkType, int annualVisitors, int page = 1, int pageSize = 6)
     {
       IQueryable<Park> query = _db.Parks.AsQueryable();
 
@@ -35,6 +35,11 @@ namespace NationalParks.Controllers
       if (state != null)
       {
         query = query.Where(entry => entry.State == state);
+      }
+
+      if (state != null)
+      {
+        query = query.Where(entry => entry.ParkType == parkType);
       }
 
       int skip = (page - 1) * pageSize;
@@ -142,7 +147,7 @@ namespace NationalParks.Controllers
 
     [AllowAnonymous]
     [HttpGet("search")]
-    public async Task<ActionResult<List<Park>>> SearchPark([FromQuery] string state, [FromQuery] string name, [FromQuery] int? annualVisitors)
+    public async Task<ActionResult<List<Park>>> SearchPark([FromQuery] string state, [FromQuery] string name, [FromQuery] int? annualVisitors, string parkType)
     {
       IQueryable<Park> parkQuery = _db.Parks.AsQueryable();
 
@@ -159,6 +164,11 @@ namespace NationalParks.Controllers
       if (annualVisitors.HasValue)
       {
         parkQuery = parkQuery.Where(entry => entry.AnnualVisitors == annualVisitors);
+      }
+
+      if (!string.IsNullOrEmpty(parkType))
+      {
+        parkQuery = parkQuery.Where(entry => entry.ParkType.Contains(parkType));
       }
 
       return await parkQuery.ToListAsync();

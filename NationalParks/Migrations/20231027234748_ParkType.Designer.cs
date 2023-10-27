@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NationalParks.Models;
 
@@ -10,9 +11,10 @@ using NationalParks.Models;
 namespace NationalParks.Migrations
 {
     [DbContext(typeof(NationalParksContext))]
-    partial class NationalParksContextModelSnapshot : ModelSnapshot
+    [Migration("20231027234748_ParkType")]
+    partial class ParkType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
