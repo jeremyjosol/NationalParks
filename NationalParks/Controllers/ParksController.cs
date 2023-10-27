@@ -115,5 +115,26 @@ namespace NationalParks.Controllers
 
       return NoContent();
     }
+
+    [HttpGet("random")]
+    public async Task<ActionResult<Park>> GetRandomPark()
+    {
+      // query database to 'count' the number of parks
+      int count = await _db.Parks.CountAsync();
+      // generate 'random' number to the instance
+      Random randomPark = new Random();
+      // random number will be used as the index to select random park, 'next' generates the random number each time it's called
+      int index = randomPark.Next(count);
+      // 'skip' the first index and selects the first park after skipping
+      Park park = await _db.Parks.Skip(index).FirstOrDefaultAsync();
+      // if no park is found at the specified index, FirstOrDefaultAsync() returns null
+      
+      if (park == null)
+      {
+        return NotFound();
+      }
+
+      return park;
+    }
   }
 }
