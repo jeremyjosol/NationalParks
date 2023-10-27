@@ -144,17 +144,17 @@ namespace NationalParks.Controllers
 
       if (!string.IsNullOrEmpty(state))
       {
-        parkQuery = parkQuery.Where(p => p.Name.Contains(state));
+        parkQuery = parkQuery.Where(entry => entry.Name.Contains(state));
       }
 
       if (!string.IsNullOrEmpty(name))
       {
-        parkQuery = parkQuery.Where(p => p.Name.Contains(name));
+        parkQuery = parkQuery.Where(entry => entry.Name.Contains(name));
       }
 
       if (annualVisitors.HasValue)
       {
-        parkQuery = parkQuery.Where(p => p.AnnualVisitors == annualVisitors);
+        parkQuery = parkQuery.Where(entry => entry.AnnualVisitors == annualVisitors);
       }
 
       return await parkQuery.ToListAsync();
