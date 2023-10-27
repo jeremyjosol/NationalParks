@@ -128,13 +128,36 @@ namespace NationalParks.Controllers
       // 'skip' the first index and selects the first park after skipping
       Park park = await _db.Parks.Skip(index).FirstOrDefaultAsync();
       // if no park is found at the specified index, FirstOrDefaultAsync() returns null
-      
+
       if (park == null)
       {
         return NotFound();
       }
 
       return park;
+    }
+
+    [HttpGet("search")]
+    public async Task<ActionResult<List<Park>>> SearchPark([FromQuery] string state, [FromQuery] string name, [FromQuery] int? annualVisitors)
+    {
+      IQueryable<Park> parkQuery = _db.Parks.AsQueryable();
+
+      if (!string.IsNullOrEmpty(state))
+      {
+        parkQuery = parkQuery.Where(p => p.Name.Contains(state));
+      }
+
+      if (!string.IsNullOrEmpty(name))
+      {
+        parkQuery = parkQuery.Where(p => p.Name.Contains(name));
+      }
+
+      if (annualVisitors.HasValue)
+      {
+        parkQuery = parkQuery.Where(p => p.AnnualVisitors == annualVisitors);
+      }
+
+      return await parkQuery.ToListAsync();
     }
   }
 }
