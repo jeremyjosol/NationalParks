@@ -27,7 +27,7 @@ This application is designed for the exploration and interaction with various AP
  [MySQL Workbench](https://dev.mysql.com/downloads/workbench/).
 
 #### Install Postman
-(Optional) [Download and install Postman](https://www.postman.com/downloads/).
+(Optional) [Postman](https://www.postman.com/downloads/).
 
 ------------------------------
 
@@ -49,11 +49,19 @@ This application is designed for the exploration and interaction with various AP
   "AllowedHosts": "*",
   "ConnectionStrings": {
     "DefaultConnection": "Server=localhost;Port=3306;database={YOUR_DATABASE};uid={USERNAME};pwd={PASSWORD};"
-  }
+  },
+   "JWT": {
+      "ValidAudience": "example-audience",
+      "ValidIssuer": "example-issuer",
+      "Secret": "{SECRET}"
+}
 }
 ```
+  > Make sure to replace the `database`, `uid`, and `pwd` values in the MySQL database connection string with your choice of database name, your own username, and password for MySQL. For the `Secret` key, make sure to replace `{SECRET}` with a string of your choice, at least 16 characters long.
+  
+  _As per `JWT`_
 
-  > Make sure to replace the `database`, `uid`, and `pwd` values in the MySQL database connection string with your choice of database name, your own username, and password for MySQL.
+  > "Let's quickly breakdown what this object is. The ValidAudience key of our object is indicating who we are intending to distribute our JWT Tokens to, the ValidIssuer indicates who are the ones creating the tokens, and the Secret is a special string that will be used to encode our JWTs, to make them unique to our application. Depending on what type of algorithm being used, the Secret string will need to be a certain length. In this case, it needs to be at least 16 characters long." - [Calvin Will](https://github.com/CalvinPVIII/asp.net-webapi-auth-guide) 
 
 5. Within `appsettings.Development.json`, add the following code:
 
