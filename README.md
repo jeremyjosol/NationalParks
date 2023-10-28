@@ -50,7 +50,7 @@
 }
 ```
 
-  > Make sure to replace the `database`, `uid` and `pwd` values in the MySQL database connection string with your choice of database name, your own username, and password for MySQL.
+  > Make sure to replace the `database`, `uid`, and `pwd` values in the MySQL database connection string with your choice of database name, your own username, and password for MySQL.
 
 5. Within `appsettings.Development.json`, add the following code:
 
@@ -67,10 +67,10 @@
 }
 ```
 
-6. Open your shell (e.g., Terminal or GitBash) to the production directory "ArtGallery", and run `dotnet ef database update`.
+6. Open your shell (e.g., Terminal or GitBash) to the production directory "NationalParks", and run `dotnet ef database update`.
     > To optionally create a migration, run the command `dotnet ef migrations add MigrationName` where `MigrationName` is your custom name for the migration in UpperCamelCase. 
 7. To further build out this project in development mode, start the project with `dotnet watch run` in the production directory "NationalParks".
-8. Use your program of choice to make API calls. In your API calls, use the domain _http://localhost:5000_. Keep reading to learn about all of the available endpoints.
+8. Use your program of choice to make API calls. The upcoming examples will be using Postman. In your API calls, use the domain _http://localhost:5000_. Keep reading to learn about all of the available endpoints.
 
 ------------------------------
 
@@ -83,7 +83,7 @@ To explore National Parks with NSwag, launch the project using `dotnet run` with
 http://localhost:5000/swagger
 ```
 ## Generating a JSON Web Token
-In order to be authorized to use the `POST`, `PUT`, and `DELETE` functionality of the API, you are required to authenticate yourself through Postman with a JSON Web Token (JWT).
+In order to be authorized to use the `POST`, `PUT`, and `DELETE` functionality of the API, you are required to authenticate yourself through Postman with a JSON Web Token (JWT). All `GET` functionality will work for users and non-users, respectively.
 
 ------------------------------
 
@@ -153,10 +153,8 @@ Add the following query to the request as raw data in the Body tab:
 
     > You now have full access to National Parks. 
 
-Test it out by sending a `GET` request to the following endpoint `localhost:5000/api/parks/{id}`
-
 <html>
-<img src="NationalParks/wwwroot/img/Postman3.png">
+<img src="NationalParks/wwwroot/img/Postman3.jpg">
 
 ------------------------------
 
@@ -176,18 +174,20 @@ Test it out by sending a `GET` request to the following endpoint `localhost:5000
 
 `DELETE` http://localhost:5000/api/parks/{id}
 
-**Note**: `{id}` is a variable and it should be replaced with the id number of the park you want to `GET`, `PUT`, `POST` or `DELETE`.
+**Note**: `{id}` should be replaced with the id value of the park you want to `GET`, `PUT`, `POST` or `DELETE`.
 
 ------------------------------
 
-#### Optional Query String Parameters for `GET` Request
+#### Optional Query Parameters for `GET` Request
 
-| Parameter   | Type        |  Required    | Description |
-| ----------- | ----------- | -----------  | ----------- |
-| name       | String      | not required | Returns park with a matching name value |
-| state | String      | not required | Returns park with a matching state value |
-| description      | String      | not required | Returns artwork with a matching description |
-| annualVisitors        | Int         | not required | Returns parks with a matching amount of annual visitors |
+| Parameter   | Type        |   Description |
+| ----------- | ----------- |  -----------  |
+| name        | String      | Returns park(s) with a matching name value |
+| state       | String      | Returns park(s) with matching state value |
+| description | String      | Returns park(s) with matching description |
+| annualVisitors | Int      | Returns park(s) with matching amount of annual visitors |
+| parkType    | String      | Returns park(s) with matching park type; National Park or State Park |
+
 
 #### Example `GET` Query
 
@@ -195,7 +195,7 @@ Test it out by sending a `GET` request to the following endpoint `localhost:5000
 http://localhost:5000/api/parks?name=Joshua+Tree+National+Park
 ```
 
-**Note**: You should replace spaces between objects with a '+' in the query parameter, for instance, Joshua Tree National Park => "Joshua+Tree+National+Park."
+**Note**: You should replace spaces between objects with a `+` in the query parameter, for instance, Joshua Tree National Park should be represented as `Joshua+Tree+National+Park`.
 
 #### Expected JSON Response
 
@@ -206,7 +206,8 @@ http://localhost:5000/api/parks?name=Joshua+Tree+National+Park
     "name": "Joshua Tree National Park",
     "state": "California",
     "description": "Joshua Tree is famous for its unique desert landscapes and iconic Joshua trees.",
-    "annualVisitors": 3000000
+    "annualVisitors": 3000000,
+    "parkType": "National Park"
   }
 ]
 ```
@@ -223,7 +224,9 @@ Customize or use the following query as an example to the request as raw data in
   "name": "ParkName",
   "state": "ParkState",
   "description": "ParkDescription",
-  "annualVisitors": 0
+  "annualVisitors": 0,
+  "parkType": "ParkType"
+
 }
 ```
 
@@ -236,7 +239,9 @@ Customize or use the following query as an example to the request as raw data in
   "name": "ParkName",
   "state": "ParkState",
   "description": "ParkDescription",
-  "annualVisitors": 0
+  "annualVisitors": 0,
+  "parkType": "National Park"
+
 }
 ```
 
@@ -251,7 +256,9 @@ Customize or use the following query as an example to the request as raw data in
   "name": "ParkName",
   "state": "ParkState",
   "description": "ParkDescription",
-  "annualVisitors": 0
+  "annualVisitors": 0,
+  "parkType": "ParkType"
+
 }
 ```
 
@@ -262,7 +269,9 @@ Customize or use the following query as an example to the request as raw data in
   "name": "Yosemite National Park",
   "state": "California",
   "description": "Yosemite is known for its waterfalls, deep valleys, grand meadows, and ancient giant sequoias.",
-  "annualVisitors": 4000000
+  "annualVisitors": 4000000,
+  "parkType": "National Park"
+
 }
 ```
 
@@ -283,7 +292,9 @@ http://localhost:5000/api/parks/1
   "name": "ParkName",
   "state": "ParkState",
   "description": "ParkDescription",
-  "annualVisitors": 0
+  "annualVisitors": 0,
+  "parkType": "ParkType"
+
 }
 ```
 
@@ -292,7 +303,7 @@ http://localhost:5000/api/parks/1
 http://localhost:5000/api/parks/1
 ```
 
-**Note**: You do not need anything in the Body to send a `DELETE` request, simply specify the route with a valid {id}, in our example, 1, and if successful, just like in our `PUT` request example, should appear a `Status: 204 No Content` in the response Body.
+**Note**: You do not need to add anything in the Body to send a `DELETE` request, simply specify the route with a valid {id}, in our case, 1, and if successful, just like from our `PUT` request example, should appear a `Status: 204 No Content` in the response Body.
 
 Now to further test the `DELETE` query's success, send a `GET` request to the following URL: 
 ```
@@ -301,6 +312,7 @@ http://localhost:5000/api/parks/1
 
 #### Expected JSON Response
 `Status: 404 Not Found`
+  > Indicative that the object was successfully deleted.
 ```json
 {
   "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
@@ -314,7 +326,7 @@ http://localhost:5000/api/parks/1
 ```
 http://localhost:5000/api/parks/search?annualVisitors=800000
 ```
-**Note**: To customize your query, add a query parameter to the URL. In this case, we're using annualVisitors to filter parks based on their annual visitors count. You can replace 800000 with the desired value or alternatively, by using different query parameters and values, you can tailor your queries to search for parks that meet specific criteria. For instance, you could change `annualVisitors` to `state` with a value of `California` or `name` with a value of `Redwood` to search for parks by state or name, respectively. 
+**Note**: To customize your query, add a query parameter to the URL. In this case, we're using `annualVisitors` to filter parks based on their annual visitors count. You can replace `800000` with another desired value or alternatively, by using different query parameters and values, you can tailor your queries to search for parks that meet specific criteria. For instance, you could change `annualVisitors` to `state` with a value of `California`, `name` with a value of `Redwood`, or `parkType` with a value of `National+Park` to search for parks by `state`, `name`, or `type`, respectively. 
 
 #### Expected JSON Response
 ```json
@@ -324,7 +336,9 @@ http://localhost:5000/api/parks/search?annualVisitors=800000
     "name": "Redwood National and State Parks",
     "state": "California",
     "description": "Home to the tallest trees on Earth, the coastal redwoods.",
-    "annualVisitors": 800000
+    "annualVisitors": 800000,
+    "parkType": "National Park"
+
   }
 ]
 ```
@@ -342,7 +356,9 @@ http://localhost:5000/api/parks/search?state=oregon
     "name": "Silver State Falls",
     "state": "Oregon",
     "description": "Silver State Falls is a beautiful park featuring stunning waterfalls, lush forests, and hiking trails.",
-    "annualVisitors": 500000
+    "annualVisitors": 500000,
+    "parkType": "State Park"
+
   }
 ]
 ```
@@ -350,12 +366,12 @@ http://localhost:5000/api/parks/search?state=oregon
 ```
 http://localhost:5000/api/parks/random
 ```
-A self-explanatory query, this endpoint will simply generate a randomized individual park. Try it out to see what results you generate as well as the rest of the available endpoints.
+A self-explanatory query, this endpoint will simply generate a single randomized park result each time a request is sent.
 
 ------------------------------
 
 ### Pagination
-National Parks returns a default of 6 results per page at a time with a `GET` request with the following URL:
+National Parks returns a default of 6 results per page at a time for a `GET` request with the following URL:
 ```
 http://localhost:5000/api/parks/
 ```
