@@ -96,7 +96,7 @@ In Postman, create a `POST` request using the following URL:
 http://localhost:5000/accounts/register
 ```
 
-Add the following query to the request as raw data in the Body tab:
+Add the following query to the request as raw JSON data in the Body tab:
 ```json
 {
   "email": "email@test.com",
@@ -126,7 +126,7 @@ With your newly created account, create another `POST` request, this time using 
 http://localhost:5000/accounts/signin
 ```
 
-Add the following query to the request as raw data in the Body tab:
+Add the following query to the request as raw JSON data in the Body tab:
 ```json
 {
   "email": "email@test.com",
@@ -221,7 +221,7 @@ http://localhost:5000/api/parks?name=Joshua+Tree+National+Park
 http://localhost:5000/api/parks
 ```
 
-Customize or use the following query as an example to the request as raw data in the Body tab:
+Customize or use the following query as an example to the request as raw JSON data in the Body tab:
 ```json
 {
   "name": "ParkName",
@@ -252,7 +252,7 @@ Customize or use the following query as an example to the request as raw data in
 ```
 http://localhost:5000/api/parks/1
 ```
-Customize or use the following query as an example to the request as raw data in the Body tab:
+Customize or use the following query as an example to the request as raw JSON data in the Body tab:
 ```json
 {
   "parkId": 1,
