@@ -265,7 +265,7 @@ Customize or use the following query as an example to the request as raw data in
 }
 ```
 
-##### Original Value for `parkId`: 1
+##### Original Value for `parkId`: `1`
 ```json
 {
   "parkId": 1,
@@ -306,7 +306,7 @@ http://localhost:5000/api/parks/1
 http://localhost:5000/api/parks/1
 ```
 
-**Note**: You do not need to add anything in the Body to send a `DELETE` request, simply specify the route with a valid {id}, in our case, 1, and if successful, just like from our `PUT` request example, should appear a `Status: 204 No Content` in the response Body.
+**Note**: You do not need to add anything in the Body to send a `DELETE` request, simply specify the route with a valid `{id}`, in our case, `1`, and if successful, just like from our `PUT` request example, should appear a `Status: 204 No Content` in the response Body.
 
 Now to further test the `DELETE` query's success, send a `GET` request to the following URL: 
 ```
@@ -369,7 +369,7 @@ http://localhost:5000/api/parks/search?state=oregon
 ```
 http://localhost:5000/api/parks/random
 ```
-A self-explanatory query, this endpoint will simply generate a single randomized park result each time a request is sent.
+This endpoint will simply generate a single randomized park result each time a request is sent.
 
 ------------------------------
 
