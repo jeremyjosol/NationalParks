@@ -1,5 +1,8 @@
 # National Parks
 
+## About
+This application is designed for the exploration and interaction with various API endpoints related to national parks. Whether a park enthusiast or just curious about natural wonders, this application offers the capability to access, search, retrieve, and update information from a comprehensive database of national parks across the United States.
+
 ## Technologies Used
 * _Github_
 * _VSCode_
