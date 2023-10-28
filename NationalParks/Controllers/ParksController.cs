@@ -37,7 +37,7 @@ namespace NationalParks.Controllers
         query = query.Where(entry => entry.State == state);
       }
 
-      if (state != null)
+      if (parkType != null)
       {
         query = query.Where(entry => entry.ParkType == parkType);
       }
