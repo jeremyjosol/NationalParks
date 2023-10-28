@@ -18,7 +18,7 @@ namespace NationalParks.Models
     public int AnnualVisitors { get; set; }
 
     [Required]
-    [RegularExpression("^(National Park|State)$", ErrorMessage = "* Please enter a valid entry. Nation Park or State Park.")]
+    [RegularExpression("^(National Park|State Park)$", ErrorMessage = "* Please enter a valid entry. National Park or State Park.")]
     public string ParkType { get; set; }
   }
 }
