@@ -54,7 +54,7 @@ This application is designed for the exploration and interaction with various AP
       "ValidAudience": "example-audience",
       "ValidIssuer": "example-issuer",
       "Secret": "{SECRET}"
-}
+  }
 }
 ```
   > Make sure to replace the `database`, `uid`, and `pwd` values in the MySQL database connection string with your choice of database name, your own username, and password for MySQL. For the `Secret` key, make sure to replace `{SECRET}` with a string of your choice, at least 16 characters long.
